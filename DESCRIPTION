@@ -1,0 +1,13 @@
+Package: myfs
+Type: Package
+Title: Useful functions created by hosscine
+Version: 1.0.0
+Author: hosscine
+Maintainer: hosscine <futagamirentaro@gmail.com>
+Description: Including various functions, for example, saves plot immediately, 
+    plots beautifully and well summarized, makes easy to treat matrix and list.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports: grDevices
+RoxygenNote: 6.0.1
