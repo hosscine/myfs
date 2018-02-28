@@ -1,9 +1,8 @@
 Package: myfs
 Type: Package
-Title: Useful functions created by hosscine
-Version: 1.1.0
-Author: hosscine
-Maintainer: hosscine <futagamirentaro@gmail.com>
+Title: Useful Functions Created by Myself
+Version: 0.1.2
+Authors@R: person("Rentaro", "Futagami", ,"futagamirentaro@gmail.com",c("aut","cre"))
 Description: Including various functions, for example, saves plot immediately, 
     plots beautifully and well summarized, makes easy to treat matrix and list.
 License: GPL-3

@@ -1,4 +1,4 @@
-#' Generates random natural numbers
+#' Generates random natural numbers.
 #'
 #' @param n number of the random numbers.
 #' @param min min of random numbers.
@@ -21,7 +21,7 @@ runifN <- function(n,min=1,max=10){
 #   chose
 # }
 
-#' Calculates norm of \code{x}
+#' Calculates norm of \code{x}.
 #'
 #' @param x input numeric vector.
 #'
@@ -30,7 +30,7 @@ runifN <- function(n,min=1,max=10){
 vnorm <- function(x) sqrt(sum(x^2))
 
 
-#' Calculates norm for each row of \code{X}
+#' Calculates norm for each row of \code{X}.
 #'
 #' @param X input numeric matrix.
 #'
@@ -38,10 +38,10 @@ vnorm <- function(x) sqrt(sum(x^2))
 #' @export
 rowNorm <- function(X) sqrt(rowSums(X^2))
 
-#' Calculates \code{X - a}
+#' Calculates \code{X - a} with row first.
 #'
-#' R's default calculation of \code{X - a} is in col first likes \code{X[,1] - a}, \code{X[,2] - a}, ....
-#' This function implements calclation in row first likes \code{X[1,] - a}, \code{X[1,] - a}, ....
+#' R's default calculation of \code{X - a} is with col first likes \code{X[,1] - a}, \code{X[,2] - a}, ....
+#' This function implements calclation with row first likes \code{X[1,] - a}, \code{X[1,] - a}, ....
 #'
 #' @param X Minused matrix.
 #' @param a Minuses vector.
@@ -50,23 +50,33 @@ rowNorm <- function(X) sqrt(rowSums(X^2))
 #' @export
 rowMinus <- function(X,a) t(t(X)-a)
 
-#' Calculates \code{X - a}
+#' Calculates \code{X \* a} with row first.
 #'
-#' R's default calculation of \code{X \* a} is in col first likes \code{X[,1] \* a}, \code{X[,2] \* a}, ....
-#' This function implements calclation in row first likes \code{X[1,] \* a}, \code{X[1,] \* a}, ....
+#' R's default calculation of \code{X \* a} is with col first likes \code{X[,1] \* a}, \code{X[,2] \* a}, ....
+#' This function implements calclation with row first likes \code{X[1,] \* a}, \code{X[1,] \* a}, ....
 #'
 #' @param X Timed matrix.
 #' @param a Times vector.
 #'
-#' @return \code{X \* a} in row first.
+#' @return \code{X \* a} with row first.
 rowTimes <- function(X,a) t(t(X)*a)
 
-# 行列からNAを取り除きます
-ExceptNA <- function(mat, replace = 0){
-  return(ifelse(is.na(mat),replace,mat))
-}
+#' Replaces NA from matrix with maintaining the dimension.
+#'
+#' @param X input matrix.
+#' @param replace value to be replaced for NA.
+#'
+#' @return NA removed matrix.
+#' @export
+replaceNA <- function(mat, replace = 0) return(ifelse(is.na(mat),replace,mat))
 
-#重複を同率にするorderです
+#' \code{order} function regards a duplication value as the same ranking.
+#'
+#' @param x input vector.
+#' @param decreasing if \code{TRUE}, proceses in decreasing.
+#'
+#' @return order of \code{x}.
+#' @export
 order2 <- function(x, decreasing = F){
   v <- sort(unique(x))
   if(decreasing) v <- rev(v)
