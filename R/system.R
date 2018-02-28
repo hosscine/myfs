@@ -2,19 +2,21 @@
 #'
 #' @param eval evalated contents.
 #' @param keep if \code{T}, returns evalated object with elapsed time.
+#' @param return if \code{T}, returns evalated object.
 #'
 #' @return evalated object.
 #' @export
 #'
 #' @examples runif.sum <- evalTimer(sum(runif(5000)))
-evalTimer <- function(eval,keep=F){
-  print(Sys.time())
+evalTimer <- function(eval,keep=F,return=T){
+  cat("Timer start:",as.character(Sys.time()),"\n")
   t <- proc.time()
   ret <- eval
-  print(Sys.time())
-  print(time <- proc.time()-t)
+  cat("Timer end  :",as.character(Sys.time()),"\n\n")
+  cat("elapsed time is:",(time <- proc.time()-t)[3])
+  # print(time <- proc.time()-t)
   if(keep) attr(ret,"time") <- time
-  ret
+  if(return) return(ret)
 }
 
 #' Save global environment.

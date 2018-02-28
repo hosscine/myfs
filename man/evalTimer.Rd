@@ -4,12 +4,14 @@
 \alias{evalTimer}
 \title{Measure the elapsed time of \code{eval} and returns the result.}
 \usage{
-evalTimer(eval, keep = F)
+evalTimer(eval, keep = F, return = T)
 }
 \arguments{
 \item{eval}{evalated contents.}
 
 \item{keep}{if \code{T}, returns evalated object with elapsed time.}
+
+\item{return}{if \code{T}, returns evalated object.}
 }
 \value{
 evalated object.

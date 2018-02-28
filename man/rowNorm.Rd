@@ -2,7 +2,7 @@
 % Please edit documentation in R/calculation.R
 \name{rowNorm}
 \alias{rowNorm}
-\title{Calculates norm for each row of \code{X}}
+\title{Calculates norm for each row of \code{X}.}
 \usage{
 rowNorm(X)
 }
@@ -13,5 +13,5 @@ rowNorm(X)
 norm for each row of \code{X}.
 }
 \description{
-Calculates norm for each row of \code{X}
+Calculates norm for each row of \code{X}.
 }

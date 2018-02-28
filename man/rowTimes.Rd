@@ -2,7 +2,7 @@
 % Please edit documentation in R/calculation.R
 \name{rowTimes}
 \alias{rowTimes}
-\title{Calculates \code{X - a}}
+\title{Calculates \code{X \* a} with row first.}
 \usage{
 rowTimes(X, a)
 }
@@ -12,9 +12,9 @@ rowTimes(X, a)
 \item{a}{Times vector.}
 }
 \value{
-\code{X \* a} in row first.
+\code{X \* a} with row first.
 }
 \description{
-R's default calculation of \code{X \* a} is in col first likes \code{X[,1] \* a}, \code{X[,2] \* a}, ....
-This function implements calclation in row first likes \code{X[1,] \* a}, \code{X[1,] \* a}, ....
+R's default calculation of \code{X \* a} is with col first likes \code{X[,1] \* a}, \code{X[,2] \* a}, ....
+This function implements calclation with row first likes \code{X[1,] \* a}, \code{X[1,] \* a}, ....
 }

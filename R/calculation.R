@@ -68,7 +68,7 @@ rowTimes <- function(X,a) t(t(X)*a)
 #'
 #' @return NA removed matrix.
 #' @export
-replaceNA <- function(mat, replace = 0) return(ifelse(is.na(mat),replace,mat))
+replaceNA <- function(X, replace = 0) return(ifelse(is.na(X),replace,X))
 
 #' \code{order} function regards a duplication value as the same ranking.
 #'

@@ -2,7 +2,7 @@
 % Please edit documentation in R/calculation.R
 \name{vnorm}
 \alias{vnorm}
-\title{Calculates norm of \code{x}}
+\title{Calculates norm of \code{x}.}
 \usage{
 vnorm(x)
 }
@@ -13,5 +13,5 @@ vnorm(x)
 norm of \code{x}.
 }
 \description{
-Calculates norm of \code{x}
+Calculates norm of \code{x}.
 }

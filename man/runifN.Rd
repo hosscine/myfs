@@ -2,7 +2,7 @@
 % Please edit documentation in R/calculation.R
 \name{runifN}
 \alias{runifN}
-\title{Generates random natural numbers}
+\title{Generates random natural numbers.}
 \usage{
 runifN(n, min = 1, max = 10)
 }
@@ -17,5 +17,5 @@ runifN(n, min = 1, max = 10)
 random natural numbers.
 }
 \description{
-Generates random natural numbers
+Generates random natural numbers.
 }

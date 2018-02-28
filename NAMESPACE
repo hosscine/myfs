@@ -3,6 +3,8 @@
 export(debugText)
 export(evalTimer)
 export(keywait)
+export(order2)
+export(replaceNA)
 export(rowMinus)
 export(rowNorm)
 export(runifN)
