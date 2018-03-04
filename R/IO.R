@@ -31,7 +31,8 @@ debugText <- function(...){
       if (typeof(k)=="language") {cat(as.character(k),"(",class(k)[1],") = ",sep = "")}
       else cat(k,"(",class(k)[1],") = ",sep = "")
 
-      if(!is.matrix(v) && (is.logical(v) || is.numeric(v) || is.complex(v) || is.character(v))){ cat(v, "\n") }
+      if(!is.matrix(v) && (is.logical(v) || is.numeric(v) || is.complex(v) || is.character(v)))
+        cat(v, "\n")
       else{ cat("\n"); print(v); cat("\n") }
     },
     key, val)
