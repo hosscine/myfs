@@ -8,6 +8,7 @@
 #'
 #' @return random natural numbers.
 #' @export
+#'
 runifN <- function(n,min=1,max=10){
   if(min > max) stop("argment max is not larger than min.")
   if(!min-round(min)==0 || !max-round(max)==0) stop("argment max and min must be integer.")
@@ -27,6 +28,7 @@ runifN <- function(n,min=1,max=10){
 #'
 #' @return norm of \code{x}.
 #' @export
+#'
 vnorm <- function(x) sqrt(sum(x^2))
 
 
@@ -36,6 +38,7 @@ vnorm <- function(x) sqrt(sum(x^2))
 #'
 #' @return norm for each row of \code{X}.
 #' @export
+#'
 rowNorm <- function(X) sqrt(rowSums(X^2))
 
 #' Calculates \code{X - a} with row first.
@@ -48,6 +51,7 @@ rowNorm <- function(X) sqrt(rowSums(X^2))
 #'
 #' @return \code{X - a} in row first.
 #' @export
+#'
 rowMinus <- function(X,a) t(t(X)-a)
 
 #' Calculates \code{X \* a} with row first.
@@ -59,6 +63,7 @@ rowMinus <- function(X,a) t(t(X)-a)
 #' @param a Times vector.
 #'
 #' @return \code{X \* a} with row first.
+#'
 rowTimes <- function(X,a) t(t(X)*a)
 
 #' Replaces NA from matrix with maintaining the dimension.
@@ -68,6 +73,7 @@ rowTimes <- function(X,a) t(t(X)*a)
 #'
 #' @return NA removed matrix.
 #' @export
+#'
 replaceNA <- function(X, replace = 0) return(ifelse(is.na(X),replace,X))
 
 #' \code{order} function regards a duplication value as the same ranking.
@@ -77,6 +83,7 @@ replaceNA <- function(X, replace = 0) return(ifelse(is.na(X),replace,X))
 #'
 #' @return order of \code{x}.
 #' @export
+#'
 order2 <- function(x, decreasing = F){
   v <- sort(unique(x))
   if(decreasing) v <- rev(v)

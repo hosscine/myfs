@@ -17,4 +17,5 @@ f <- function(n){
   image(mat)
 }
 f(3)
+
 }
