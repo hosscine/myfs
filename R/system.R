@@ -44,3 +44,10 @@ saveEnvironment <- function(){
   if(is.todayDirectory()) stop("Current directory is not project directory.")
   . <- save.image(".RData")
 }
+
+#' Sets current directory to project directory.
+#'
+#' @importFrom rstudioapi getActiveProject
+#'
+#' @export
+setwdProject <- function() setwd(rstudioapi::getActiveProject())

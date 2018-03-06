@@ -5,7 +5,7 @@
 todaywd <- function(){
   today <- format(Sys.time(),"%Y_%m_%d")
   setwd(savedDir())
-  if (length(which((list.files()==today)==T))==0) dir.create(today)
+  if(length(which((list.files()==today)==T))==0) dir.create(today)
   setwd(paste0(savedDir(),"/",today))
 }
 
@@ -39,7 +39,7 @@ subwd <- function(name, current = F){
 #'
 savedDir <- function(pass){
   if(missing(pass)){
-    if(is.null(getOption("FTG.funcs.savedirectory"))){
+    if(is.null(getOption("myfs.savedirectory"))){
       lpass <- system.file("config", package = "FTG.funcs")
       # lpass <- paste0(getwd(),"/config")
       if(length(dir(lpass))==0){
