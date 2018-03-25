@@ -7,7 +7,7 @@
 vnorm(x)
 }
 \arguments{
-\item{x}{input numeric vector.}
+\item{x}{target vector.}
 }
 \value{
 norm of \code{x}.

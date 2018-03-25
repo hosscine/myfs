@@ -7,9 +7,9 @@
 rowMinus(X, a)
 }
 \arguments{
-\item{X}{Minused matrix.}
+\item{X}{minused matrix.}
 
-\item{a}{Minuses vector.}
+\item{a}{minuses vector.}
 }
 \value{
 \code{X - a} in row first.

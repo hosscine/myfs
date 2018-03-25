@@ -7,7 +7,7 @@
 rowNorm(X)
 }
 \arguments{
-\item{X}{input numeric matrix.}
+\item{X}{target matrix.}
 }
 \value{
 norm for each row of \code{X}.

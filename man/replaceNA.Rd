@@ -7,7 +7,7 @@
 replaceNA(X, replace = 0)
 }
 \arguments{
-\item{X}{input matrix.}
+\item{X}{target matrix.}
 
 \item{replace}{value to be replaced for NA.}
 }

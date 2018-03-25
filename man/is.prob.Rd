@@ -7,7 +7,7 @@
 is.prob(x)
 }
 \arguments{
-\item{x}{tested object..}
+\item{x}{object to test.}
 }
 \description{
 Asserts \code{x} whether probabic number or not.

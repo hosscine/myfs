@@ -9,9 +9,9 @@ runifN(n, min = 1, max = 10)
 \arguments{
 \item{n}{number of the random numbers.}
 
-\item{min}{min of random numbers.}
+\item{min}{min of the random numbers.}
 
-\item{max}{max of random numbers.}
+\item{max}{max of the random numbers.}
 }
 \value{
 random natural numbers.

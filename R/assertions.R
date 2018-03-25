@@ -1,6 +1,6 @@
 #' Asserts \code{x} whether probabic number or not.
 #'
-#' @param x tested object..
+#' @param x object to test.
 #'
 #' @importFrom assertthat on_failure is.number
 #'
@@ -14,7 +14,7 @@ assertthat::on_failure(is.prob) <- function(call, env){
 
 #' Asserts \code{x} whether numeric range or not.
 #'
-#' @param x tested object.
+#' @param x object to test.
 #'
 #' @export
 #'

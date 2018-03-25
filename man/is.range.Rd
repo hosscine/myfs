@@ -7,7 +7,7 @@
 is.range(x)
 }
 \arguments{
-\item{x}{tested object.}
+\item{x}{object to test.}
 }
 \description{
 Asserts \code{x} whether numeric range or not.

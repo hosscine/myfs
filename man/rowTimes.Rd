@@ -7,9 +7,9 @@
 rowTimes(X, a)
 }
 \arguments{
-\item{X}{Timed matrix.}
+\item{X}{timed matrix.}
 
-\item{a}{Times vector.}
+\item{a}{times vector.}
 }
 \value{
 \code{X \* a} with row first.

@@ -7,7 +7,7 @@
 order2(x, decreasing = F)
 }
 \arguments{
-\item{x}{input vector.}
+\item{x}{target vector.}
 
 \item{decreasing}{if \code{TRUE}, proceses in decreasing.}
 }

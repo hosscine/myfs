@@ -7,7 +7,7 @@
 evalTimer(eval, keep = F, return = T)
 }
 \arguments{
-\item{eval}{evalated contents.}
+\item{eval}{evalated code.}
 
 \item{keep}{if \code{T}, returns evalated object with elapsed time.}
 

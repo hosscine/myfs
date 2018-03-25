@@ -1,6 +1,6 @@
 #' Measure the elapsed time of \code{eval} and returns the result.
 #'
-#' @param eval evalated contents.
+#' @param eval evalated code.
 #' @param keep if \code{T}, returns evalated object with elapsed time.
 #' @param return if \code{T}, returns evalated object.
 #'
