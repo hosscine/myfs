@@ -233,3 +233,18 @@ quadrature <- function(x){
   x <- x$x
   sum(diff(x)*y[2:length(y)])
 }
+
+#' Calculates angle of two vectors.
+#'
+#' @param x vector 1.
+#' @param y vector 2.
+#'
+#' @return angle in radian.
+#' @export
+#'
+#' @examples
+#' # a example of orthogonal vectors
+#' angle(c(0, 1), c(1, 0))
+#' # = pi / 2
+#'
+angle <- function(x, y) acos(sum(x * y) / vnorm(x) / vnorm(y))
