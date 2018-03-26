@@ -40,8 +40,9 @@ subwd <- function(name, current = F){
 savedDir <- function(pass){
   if(missing(pass)){
     if(is.null(getOption("myfs.savedirectory"))){
+      # try to road package config file
       lpass <- system.file("config", package = "myfs")
-      # lpass <- paste0(getwd(),"/config")
+      # whether package config is null or not
       if(length(dir(lpass))==0){
         dirpass <- paste0("~/R/","\u5b9f\u9a13\u30c7\u30fc\u30bf")
         save(dirpass,file = paste0(lpass,"/dir"))
