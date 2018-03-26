@@ -40,24 +40,24 @@ subwd <- function(name, current = F){
 savedDir <- function(pass){
   if(missing(pass)){
     if(is.null(getOption("myfs.savedirectory"))){
-      lpass <- system.file("config", package = "FTG.funcs")
+      lpass <- system.file("config", package = "myfs")
       # lpass <- paste0(getwd(),"/config")
       if(length(dir(lpass))==0){
         dirpass <- paste0("~/R/","\u5b9f\u9a13\u30c7\u30fc\u30bf")
         save(dirpass,file = paste0(lpass,"/dir"))
-        options("FTG.funcs.savedirectory"=dirpass)
+        options("myfs.savedirectory"=dirpass)
       }
       else{
         load(paste0(lpass,"/dir"))
-        options("FTG.funcs.savedirectory"=dirpass)
+        options("myfs.savedirectory"=dirpass)
       }
     }
   }
   else{
     save(pass,file = paste0(pass,"/dir"))
-    options("FTG.funcs.savedirectory"=pass)
+    options("myfs.savedirectory"=pass)
   }
-  return(getOption("FTG.funcs.savedirectory"))
+  return(getOption("myfs.savedirectory"))
 }
 
 #' Checks if current directory is today directory or not.
