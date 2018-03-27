@@ -67,8 +67,10 @@ dir.create.deep <- function(pass){
     sppass.tmp <- sppass[1:i]
     sppass.tmp$sep <- "/"
     pass.tmp <- do.call(paste,sppass.tmp)
-    print(dir(pass.tmp))
-    if(length(dir(pass.tmp)) == 0) dir.create(pass.tmp)
+    if(pass.tmp == "") next
+
+    dirok <- try(is.dir(pass.tmp), silent = T)
+    if(dirok != T) dir.create(pass.tmp)
   }
   if(!is.dir(pass)) stop(paste("creation of directory",pass,"is failed."))
 }
