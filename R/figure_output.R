@@ -40,24 +40,41 @@ subwd <- function(name, current = F){
 savedDir <- function(pass){
   if(missing(pass)){
     if(is.null(getOption("myfs.savedirectory"))){
-      # try to road package config file
-      lpass <- system.file("config", package = "myfs")
-      # whether package config is null or not
-      if(length(dir(lpass))==0){
-        dirpass <- paste0("~/R/","\u5b9f\u9a13\u30c7\u30fc\u30bf")
-        save(dirpass,file = paste0(lpass,"/dir"))
-        options("myfs.savedirectory"=dirpass)
+      # checks directory that contains config file. if not exists, creates it.
+      pass.contain <- paste0(system.file(package = "myfs"), "/config")
+      dir.create.deep(pass.contain)
+
+      # if package config is not exists, sets saved directory to default.
+      if(length(dir(pass.contain)) == 0){
+        # sets default saved directory for each os.
+        if(Sys.info()["sysname"] == "windows") # Windows
+          dirpass <- paste0("~/R/","\u5b9f\u9a13\u30c7\u30fc\u30bf")
+        else if(Sys.info()["sysname"] == "Darwin") # OSX
+          dirpass <- paste0("~/Documents/R/","\u5b9f\u9a13\u30c7\u30fc\u30bf")
+        else dirpass <- paste0("~/Documents/R/","\u5b9f\u9a13\u30c7\u30fc\u30bf")
+
+        # saves saved directory and sets it in environment.
+        print(save(dirpass,file = paste0(pass.contain,"/dir")))
+        options("myfs.savedirectory" = dirpass)
       }
       else{
-        load(paste0(lpass,"/dir"))
-        options("myfs.savedirectory"=dirpass)
+        # loads saved directory and sets it in environment.
+        load(paste0(pass.contain,"/dir"))
+        options("myfs.savedirectory" = dirpass)
       }
+
     }
   }
   else{
-    save(pass,file = paste0(pass,"/dir"))
-    options("myfs.savedirectory"=pass)
+    # checks directory that contains config file. if not exists, creates it.
+    pass.contain <- paste0(system.file(package = "myfs"), "/config")
+    dir.create.deep(pass.contain)
+
+    # saves saved directory and sets it in environment.
+    save(pass,file = paste0(pass.contain,"/dir"))
+    options("myfs.savedirectory" = pass)
   }
+  dir.create.deep(getOption("myfs.savedirectory"))
   return(getOption("myfs.savedirectory"))
 }
 
