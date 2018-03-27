@@ -234,7 +234,9 @@ quadrature <- function(x){
   sum(diff(x)*y[2:length(y)])
 }
 
-#' Calculates angle of two vectors.
+#' Calculates angle of 2-dimensional vectors.
+#'
+#' This function calculates the angle of x to y in anticlockwise.
 #'
 #' @param x vector 1.
 #' @param y vector 2.
@@ -244,7 +246,23 @@ quadrature <- function(x){
 #'
 #' @examples
 #' # a example of orthogonal vectors
-#' angle(c(0, 1), c(1, 0))
-#' # = pi / 2
 #'
-angle <- function(x, y) acos(sum(x * y) / vnorm(x) / vnorm(y))
+#' angle(c(1, 0), c(0, 1))
+#' # = 1 / 2 * pi
+#'
+#' angle(c(0, 1), c(1, 0))
+#' # = 3 / 2 * pi
+#'
+angle <- function(x, y){
+  assert_that(length(x) == 2)
+  assert_that(length(y) == 2)
+
+  xrad <- atan2(x[2], x[1])
+  if(xrad < 0) xrad <- xrad + 2*pi
+  yrad <- atan2(y[2], y[1])
+  if(yrad < 0) yrad <- yrad + 2*pi
+
+  angle <- yrad - xrad
+  if(angle < 0) return(angle + 2*pi)
+  else return(angle)
+}
