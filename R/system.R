@@ -51,3 +51,24 @@ saveEnvironment <- function(){
 #'
 #' @export
 setwdProject <- function() setwd(rstudioapi::getActiveProject())
+
+#' Checks and creates a unknown directory when it is not exist.
+#'
+#' @param pass target directory pass.
+#'
+#' @importFrom assertthat is.dir
+#'
+#' @export
+#'
+dir.create.deep <- function(pass){
+  sppass <- strsplit(pass,split = "/")
+  sppass <- as.list(sppass[[1]])
+  for (i in 1:length(sppass)) {
+    sppass.tmp <- sppass[1:i]
+    sppass.tmp$sep <- "/"
+    pass.tmp <- do.call(paste,sppass.tmp)
+    print(dir(pass.tmp))
+    if(length(dir(pass.tmp)) == 0) dir.create(pass.tmp)
+  }
+  if(!is.dir(pass)) stop(paste("creation of directory",pass,"is failed."))
+}

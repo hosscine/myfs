@@ -2,7 +2,7 @@
 % Please edit documentation in R/calculation.R
 \name{angle}
 \alias{angle}
-\title{Calculates angle of two vectors.}
+\title{Calculates angle of 2-dimensional vectors.}
 \usage{
 angle(x, y)
 }
@@ -15,11 +15,15 @@ angle(x, y)
 angle in radian.
 }
 \description{
-Calculates angle of two vectors.
+This function calculates the angle of x to y in anticlockwise.
 }
 \examples{
 # a example of orthogonal vectors
+
+angle(c(1, 0), c(0, 1))
+# = 1 / 2 * pi
+
 angle(c(0, 1), c(1, 0))
-# = pi / 2
+# = 3 / 2 * pi
 
 }
