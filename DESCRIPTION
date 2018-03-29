@@ -9,9 +9,10 @@ License: GPL (>=3)
 Encoding: UTF-8
 LazyData: true
 BugReports: https://github.com/hosscine/myfs/issues
-Imports: 
+Imports:
     grDevices,
     stats,
     assertthat,
-    rstudioapi
+    rstudioapi,
+    magrittr
 RoxygenNote: 6.0.1
