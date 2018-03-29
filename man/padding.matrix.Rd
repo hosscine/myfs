@@ -4,14 +4,14 @@
 \alias{padding.matrix}
 \title{Padding (expanding rows and cols) for \code{matrix}.}
 \usage{
-padding.matrix(X, size = 1, replace = 0)
+padding.matrix(X, size = 1, replace = NULL)
 }
 \arguments{
 \item{X}{target matrix.}
 
 \item{size}{expanding size.}
 
-\item{replace}{values of expanded elements.}
+\item{replace}{values of expanded elements. if NULL, copies border values of the matrix.}
 }
 \value{
 padding matrix.

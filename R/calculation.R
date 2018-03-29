@@ -274,6 +274,7 @@ angle <- function(x, y){
 #' @param replace values of expanded elements. if NULL, copies border values of the matrix.
 #'
 #' @importFrom assertthat is.number
+#' @importFrom magrittr %>%
 #'
 #' @return padding matrix.
 #' @export
