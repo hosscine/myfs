@@ -1,7 +1,7 @@
 Package: myfs
 Type: Package
 Title: Useful Functions Created by Myself
-Version: 0.4.3.9000
+Version: 0.4.4.9000
 Authors@R: person("Rentaro", "Futagami", ,"futagamirentaro@gmail.com",c("aut","cre"))
 Description: Including various functions, for example, saves plot immediately, 
     plots beautifully and well summarized, makes easy to treat matrix and list.

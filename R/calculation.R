@@ -266,3 +266,18 @@ angle <- function(x, y){
   if(angle < 0) return(angle + 2*pi)
   else return(angle)
 }
+
+#' Padding (expanding rows and cols) for \code{matrix}.
+#'
+#' @param X target matrix.
+#' @param size expanding size.
+#' @param replace values of expanded elements.
+#'
+#' @return padding matrix.
+#' @export
+#'
+padding.matrix <- function(X, size = 1, replace = 0){
+  padded <- matrix(replace, nrow(X) + size * 2, ncol(X) + size * 2)
+  padded[(1 + size):(nrow(X) - size), (1 + size):(ncol(X) - size)] <- X
+  return(padded)
+}
