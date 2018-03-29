@@ -271,13 +271,49 @@ angle <- function(x, y){
 #'
 #' @param X target matrix.
 #' @param size expanding size.
-#' @param replace values of expanded elements.
+#' @param replace values of expanded elements. if NULL, copies border values of the matrix.
+#'
+#' @importFrom assertthat is.number
 #'
 #' @return padding matrix.
 #' @export
 #'
-padding.matrix <- function(X, size = 1, replace = 0){
-  padded <- matrix(replace, nrow(X) + size * 2, ncol(X) + size * 2)
-  padded[(1 + size):(nrow(X) - size), (1 + size):(ncol(X) - size)] <- X
+padding.matrix <- function(X, size = 1, replace = NULL){
+  # check args
+  assert_that(nrow(X) >= 2 && ncol(X) >= 2)
+  if(is.number(replace)) data <- replace
+  else data <- 0
+
+  # simple padding
+  padded <- matrix(data, nrow(X) + size * 2, ncol(X) + size * 2)
+  padded[(1 + size):(nrow(padded) - size), (1 + size):(ncol(padded) - size)] <- X
+
+  # padding with border values of matrix.
+  if(is.null(replace)){
+    padded[expand.grid(1:(1 + size), 1:(1 + size)) %>% as.matrix] <-
+      X[1, 1] # top left
+    padded[expand.grid((2 + size):(size + nrow(X) - 1), 1:(1 + size)) %>% as.matrix] <-
+      X[2:(nrow(X) - 1), 1] # middle left
+    padded[expand.grid((size + nrow(X)):nrow(padded), 1:(1 + size)) %>% as.matrix] <-
+      X[nrow(X), 1] # bottom left
+
+    if(ncol(X) > 2){
+      ind.top.center <- expand.grid(1:(1 + size), (2 + size):(size + ncol(X) - 1)) %>% as.matrix
+      ind.top.center <- ind.top.center[sapply(1:(size + 1), seq, to = nrow(ind.top.center), by = size + 1) %>% as.numeric,]
+      padded[ind.top.center] <- X[1, 2:(ncol(X) - 1)] # top center
+
+      ind.bottom.center <- expand.grid((size + nrow(X)):nrow(padded), (2 + size):(size + ncol(X) - 1)) %>% as.matrix
+      ind.bottom.center <- ind.bottom.center[sapply(1:(size + 1), seq, to = nrow(ind.bottom.center), by = size + 1) %>% as.numeric,]
+      padded[ind.bottom.center] <- X[nrow(X), 2:(ncol(X) - 1)] # bottom center
+    }
+
+    padded[expand.grid(1:(1 + size), (size + ncol(X)):ncol(padded)) %>% as.matrix] <-
+      X[1, ncol(X)] # top right
+    padded[expand.grid((2 + size):(size + nrow(X) - 1), (size + ncol(X)):ncol(padded)) %>% as.matrix] <-
+      X[2:(nrow(X) - 1), ncol(X)] # middle right
+    padded[expand.grid((size + nrow(X)):nrow(padded), (size + ncol(X)):ncol(padded)) %>% as.matrix] <-
+      X[nrow(X), ncol(X)] # bottom right
+  }
+
   return(padded)
 }
