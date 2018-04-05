@@ -47,7 +47,7 @@ savedDir <- function(pass){
       # if package config is not exists, sets saved directory to default.
       if(length(dir(pass.contain)) == 0){
         # sets default saved directory for each os.
-        if(Sys.info()["sysname"] == "windows") # Windows
+        if(Sys.info()["sysname"] == "Windows") # Windows
           dirpass <- paste0("~/R/","\u5b9f\u9a13\u30c7\u30fc\u30bf")
         else if(Sys.info()["sysname"] == "Darwin") # OSX
           dirpass <- paste0("~/Documents/R/","\u5b9f\u9a13\u30c7\u30fc\u30bf")
