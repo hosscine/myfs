@@ -9,7 +9,14 @@
 #' @export
 #'
 setMargin <- function(top.4 = 4, left.4 = 4, bottom.5 = 5, right.2 = 2)
-  graphics::par(mar=c(bottom.5, left.4, top.4, right.2))
+  graphics::par(mar = c(bottom.5, left.4, top.4, right.2))
+
+#' Changes margins to zeros
+#'
+#' @export
+#'
+setMarginZero <- function()
+  graphics::par(mar = c(0, 0, 0, 0))
 
 #' Reset the graphics parameter mfrow as defalt.
 #'
