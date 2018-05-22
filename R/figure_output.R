@@ -3,10 +3,10 @@
 #' @export
 #'
 todaywd <- function(){
-  today <- format(Sys.time(),"%Y_%m_%d")
+  today <- format(Sys.time(), "%Y_%m_%d")
   setwd(savedDir())
-  if(length(which((list.files()==today)==T))==0) dir.create(today)
-  setwd(paste0(savedDir(),"/",today))
+  if(!today %in% list.files()) dir.create(today)
+  . <- setwd(paste0(savedDir(), "/", today))
 }
 
 #' Creates sub directory for saving a number of images.
@@ -48,18 +48,18 @@ savedDir <- function(pass){
       if(length(dir(pass.contain)) == 0){
         # sets default saved directory for each os.
         if(Sys.info()["sysname"] == "Windows") # Windows
-          dirpass <- paste0("~/R/","\u5b9f\u9a13\u30c7\u30fc\u30bf")
+          dirpass <- paste0("~/R/", "\u5b9f\u9a13\u30c7\u30fc\u30bf")
         else if(Sys.info()["sysname"] == "Darwin") # OSX
-          dirpass <- paste0("~/Documents/R/","\u5b9f\u9a13\u30c7\u30fc\u30bf")
-        else dirpass <- paste0("~/Documents/R/","\u5b9f\u9a13\u30c7\u30fc\u30bf")
+          dirpass <- paste0("~/Documents/R/", "\u5b9f\u9a13\u30c7\u30fc\u30bf")
+        else dirpass <- paste0("~/Documents/R/", "\u5b9f\u9a13\u30c7\u30fc\u30bf")
 
         # saves saved directory and sets it in environment.
-        print(save(dirpass,file = paste0(pass.contain,"/dir")))
+        print(save(dirpass, file = paste0(pass.contain, "/dir")))
         options("myfs.savedirectory" = dirpass)
       }
       else{
         # loads saved directory and sets it in environment.
-        load(paste0(pass.contain,"/dir"))
+        load(paste0(pass.contain, "/dir"))
         options("myfs.savedirectory" = dirpass)
       }
 

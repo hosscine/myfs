@@ -68,7 +68,7 @@ dir.create.deep <- function(pass){
     sppass.tmp <- sppass[1:i]
     sppass.tmp$sep <- "/"
     pass.tmp <- do.call(paste,sppass.tmp)
-    if(pass.tmp == "") next
+    if(pass.tmp == "" || nchar(pass.tmp) == 2) next
 
     dirok <- try(is.dir(pass.tmp), silent = T)
     if(dirok != T) dir.create(pass.tmp)
