@@ -37,11 +37,12 @@ keywait <- function() invisible(readline(prompt="Press [enter] to continue"))
 #' Save global environment.
 #'
 #' Save global environment as non named file ".RData" without closing RStudio.
+#' Directory to save is set project directory.
 #'
 #' @export
 #'
 saveEnvironment <- function(){
-  if(is.todayDirectory()) stop("Current directory is not project directory.")
+  setwdProject()
   . <- save.image(".RData")
 }
 
