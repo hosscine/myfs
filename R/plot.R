@@ -71,3 +71,43 @@ image2 <- function(X, trans = F, col.rainbow = T, col.gray0 = F, bar.mar = 2){
   image.plot(legend.only = T, zlim = c(round(max(X), 2), round(min(X), 2)), col = clr,
              horizontal = F, verbose = F, legend.mar = bar.mar)
 }
+
+#' Plot databars for matrix visualization
+#'
+#' @param X target matrix.
+#' @param grid if \code{T}, drawing grid lines that separete each cells of matrix.
+#'
+#' @export
+#'
+#' @examples
+#' databar(matrix(1:9, 3, 3))
+#'
+databar <- function(X, grid = T){
+  X.normalize <- round(X / max(X), 2) * 100
+
+  bar.width.margin <- 0.1 / ncol(X)
+  bar.height.margin <- 0.1 / nrow(X)
+
+  plot(X, xlim = c(0.5, ncol(X) + 0.5), ylim = c(nrow(X) + 0.5, 0.5),
+       type = "n", axes = F, ann = F)
+  axis(side = 1, at = 1:ncol(X), labels = colnames(X))
+  axis(side = 2, at = 1:nrow(X), labels = rownames(X), las=T)
+
+  if (grid) {
+    sapply(0:ncol(X), function(v) abline(v = v + 0.5))
+    sapply(0:nrow(X), function(h) abline(h = h + 0.5))
+  }
+
+  # drawing bars
+  for (x in 1:ncol(X)) {
+    for (y in 1:nrow(X)) {
+      if (X.normalize[y, x] != 0)
+        plotrix::gradient.rect(xleft = x - 0.5 + bar.width.margin,
+                               ybottom = y - 0.5 + bar.height.margin,
+                               xright = x - 0.5 + (1 - bar.width.margin) * X.normalize[y, x] / 100,
+                               ytop = y + 0.5 - bar.height.margin,
+                               col = grDevices::cm.colors(100)[1:X.normalize[y, x]])
+      graphics::text(x, y, labels = round(X[y, x], 2))
+    }
+  }
+}

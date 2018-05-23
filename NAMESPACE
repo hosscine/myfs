@@ -2,6 +2,7 @@
 
 S3method(print,noattr)
 export(angle)
+export(databar)
 export(debugText)
 export(dir.create.deep)
 export(euclidean)

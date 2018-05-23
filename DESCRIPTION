@@ -17,5 +17,6 @@ Imports:
     magrittr,
     graphics,
     colorRamps,
-    fields
+    fields,
+    plotrix
 RoxygenNote: 6.0.1

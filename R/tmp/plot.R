@@ -49,6 +49,15 @@ image2 <- function(X, trans = F, col.rainbow = T, col.gray0 = F,bar.mar = 2){
 }
 
 # 行列の実測値を見やすいデータバーを表示します
+#' Title
+#'
+#' @param X
+#' @param grid
+#'
+#' @return
+#' @export
+#'
+#' @examples
 databar <- function(X, grid = T){
   require(plotrix)
 
