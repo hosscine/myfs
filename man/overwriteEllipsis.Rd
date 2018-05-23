@@ -2,32 +2,38 @@
 % Please edit documentation in R/function.R
 \name{overwriteEllipsis}
 \alias{overwriteEllipsis}
-\title{Overwrite some desirable arguments to the valiability arguments \code{...}.}
+\title{Overwrite some fixed arguments to the arguments \code{...} given by user call.}
 \usage{
-overwriteEllipsis(..., warn = T)
+overwriteEllipsis(..., append = NULL, warn = T)
 }
 \arguments{
 \item{...}{fixed and given arguments.}
 
-\item{warn}{if \code{T}, warnings when fixed and given argments conflict.}
+\item{append}{argments list to be appended.}
+
+\item{warn}{if \code{T}, warnings when fixed and argments given to user call conflict.}
 }
 \value{
 overwrited ellipsis.
 }
 \description{
-When ellipsis arguments is given from the parents function call as \code{...},
+When ellipsis arguments so called \code{...} is given by user call,
 frequently we want to overwrite some arguments as fixed desirable arguments.
-This function settles the situation simply.
+This function helps to settles the situation simply.
 }
 \examples{
-plot2pi <- function(x, ...){
-  ellipsis <- overwriteEllipsis(..., x = x, xlim = c(0, 2*pi), col = "red")
-  do.call(plot, ellipsis)
+# plot function with xlim = c(0, 2 * pi) and col = "red"
+plot2pired <- function(x, ...){
+  elp <- overwriteEllipsis(..., x = x, xlim = c(0, 2 * pi), col = "red")
+  do.call(plot, elp)
 }
 
-plot2pi(sin)
+plot2pired(sin)
 
-# this example is warned
-plot2pi(sin, main = "sin curve", xlim = c(-pi, pi))
+# this example is warned due to conflict argments
+plot2pired(sin, main = "sin curve", xlim = c(-pi, pi))
 
+}
+\seealso{
+\code{\link{softwriteEllipsis}}
 }

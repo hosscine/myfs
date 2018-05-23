@@ -1,32 +1,8 @@
-#' Overwrite some desirable arguments to the valiability arguments \code{...}.
-#'
-#' When ellipsis arguments is given from the parents function call as \code{...},
-#' frequently we want to overwrite some arguments as fixed desirable arguments.
-#' This function settles the situation simply.
-#'
-#' @param ... fixed and given arguments.
-#' @param warn if \code{T}, warnings when fixed and given argments conflict.
-#'
-#' @importFrom assertthat assert_that
-#'
-#' @return overwrited ellipsis.
-#' @export
-#'
-#' @examples
-#' plot2pi <- function(x, ...){
-#'   ellipsis <- overwriteEllipsis(..., x = x, xlim = c(0, 2*pi), col = "red")
-#'   do.call(plot, ellipsis)
-#' }
-#'
-#' plot2pi(sin)
-#'
-#' # this example is warned
-#' plot2pi(sin, main = "sin curve", xlim = c(-pi, pi))
-#'
-overwriteEllipsis <- function(..., warn = T){
+writeEllipsis <- function(..., append = NULL, warn = T, soft = F){
   assert_that(is.logical(warn))
 
   dots <- list(...)
+  if(!is.null(append)) dots <- c(dots, append)
   dots.names <- names(dots)
   unique.names <- unique(dots.names)
 
@@ -41,12 +17,79 @@ overwriteEllipsis <- function(..., warn = T){
 
     if(length(hit.index) > 1) conflict.flags[i] <- TRUE
 
-    dots.use.index[i] <- max(hit.index)
+    if(soft) dots.use.index[i] <- min(hit.index)
+    else dots.use.index[i] <- max(hit.index)
 
   }
 
+  debugText(conflict.flags, dots.use.index, unique.names)
+
   if(warn && T %in% conflict.flags)
-    warning("arguments ", paste(unique.names[conflict.flags],"",collapse = "and "), "is fixed")
+    if(soft) warning("arguments ", paste(unique.names[conflict.flags],"",collapse = "and "),
+                     "conflicted with recommeded argments")
+    else warning("arguments ", paste(unique.names[conflict.flags],"",collapse = "and "),
+                 "is fixed")
 
   return(dots[dots.use.index])
 }
+
+#' Overwrite some fixed arguments to the arguments \code{...} given by user call.
+#'
+#' When ellipsis arguments so called \code{...} is given by user call,
+#' frequently we want to overwrite some arguments as fixed desirable arguments.
+#' This function helps to settles the situation simply.
+#'
+#' @param ... fixed and given arguments.
+#' @param append argments list to be appended.
+#' @param warn if \code{T}, warnings when fixed and argments given to user call conflict.
+#'
+#' @importFrom assertthat assert_that
+#'
+#' @return overwrited ellipsis.
+#' @seealso \code{\link{softwriteEllipsis}}
+#' @export
+#'
+#' @examples
+#' # plot function with xlim = c(0, 2 * pi) and col = "red"
+#' plot2pired <- function(x, ...){
+#'   elp <- overwriteEllipsis(..., x = x, xlim = c(0, 2 * pi), col = "red")
+#'   do.call(plot, elp)
+#' }
+#'
+#' plot2pired(sin)
+#'
+#' # this example is warned due to conflict argments
+#' plot2pired(sin, main = "sin curve", xlim = c(-pi, pi))
+#'
+overwriteEllipsis <- function(..., append = NULL, warn = T)
+  writeEllipsis(..., warn = warn, soft = F, append = append)
+
+#' Overwrite some desirable arguments to \code{...} softly.
+#'
+#' This function is minor modificated version of \code{\link{overwriteEllipsis}}.
+#' The only difference is that don't overwrite conflict argments.
+#'
+#' @param ... fixed and given arguments.
+#' @param append argments list to be appended.
+#' @param warn if \code{T}, warnings when fixed and given argments conflict.
+#'
+#' @return overwrited ellipsis.
+#' @seealso \code{\link{overwriteEllipsis}}
+#' @export
+#'
+#' @examples
+#' # plot function with xlim = c(0, 2 * pi) and col = "red" defaultly
+#' plot2pi <- function(x, ...){
+#'   elp <- overwriteEllipsis(..., x = x, xlim = c(0, 2 * pi))
+#'   elp <- softwriteEllipsis(..., append = elp, col = "red")
+#'   do.call(plot, elp)
+#' }
+#'
+#' # this example is evaluated as col = "red"
+#' plot2pi(sin)
+#'
+#' # this example is evaluated as col = "blue"
+#' plot2pi(sin, col = "blue")
+#'
+softwriteEllipsis <- function(..., append = NULL, warn = F)
+  writeEllipsis(..., warn = warn, soft = T, append = append)
