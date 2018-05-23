@@ -15,5 +15,7 @@ Imports:
     assertthat,
     rstudioapi,
     magrittr,
-    graphics
+    graphics,
+    colorRamps,
+    fields
 RoxygenNote: 6.0.1

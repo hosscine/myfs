@@ -94,21 +94,3 @@ planePlot3d <- function(X,...){
   plot3d(X,xlab = "",ylab = "",zlab = "",axes = F,...)
 }
 
-#plotの文字を拡大します
-SetPar <- function(val=1.2){
-  par(cex=val)
-  par(cex.lab=val)
-  par(cex.axis=val)
-  par(cex.main=val)
-}
-
-#プロットのマージンを調節します
-SetMargin <- function(bottom.5 = 5, left.4 = 4, top.4 = 4, right.2 = 2){
-  par(mar=c(bottom.5, left.4, top.4, right.2))
-}
-
-#複数プロット描画モードを解除します
-ResetSplitedPlot <- function(){
-  par(mfrow = c(1,1))
-  SetMargin()
-}
