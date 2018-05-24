@@ -4,18 +4,14 @@
 \alias{image2}
 \title{Improved \code{image} function for matrix visualization}
 \usage{
-image2(X, trans = F, col.rainbow = T, col.gray0 = F, bar.mar = 2)
+image2(X, col.rainbow = F, col.gray0 = F)
 }
 \arguments{
 \item{X}{target matrix.}
 
-\item{trans}{if \code{T}, plots with transformation.}
-
 \item{col.rainbow}{if \code{T}, uses rainbow color.}
 
 \item{col.gray0}{if \code{T}, the color of cells where values are 0 is set to gray.}
-
-\item{bar.mar}{margin of color bar.}
 }
 \description{
 This function show \code{matrix} with the direction likes \code{print}.
