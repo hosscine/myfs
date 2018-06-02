@@ -1,5 +1,6 @@
 writeEllipsis <- function(..., append = NULL, warn = T, soft = F){
   assert_that(is.logical(warn))
+  if(is.logical(append)) stop("argment append requires over/softwrited ellipsis")
 
   dots <- list(...)
   if(!is.null(append)) dots <- c(dots, append)
@@ -21,8 +22,6 @@ writeEllipsis <- function(..., append = NULL, warn = T, soft = F){
     else dots.use.index[i] <- max(hit.index)
 
   }
-
-  debugText(conflict.flags, dots.use.index, unique.names)
 
   if(warn && T %in% conflict.flags)
     if(soft) warning("arguments ", paste(unique.names[conflict.flags],"",collapse = "and "),
