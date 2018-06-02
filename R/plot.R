@@ -70,10 +70,15 @@ image2 <- function(X, col.rainbow = F, col.gray0 = F){
 #' databar(matrix(1:9, 3, 3))
 #'
 databar <- function(X, grid = T){
-  X.normalize <- round(X / max(X), 2) * 100
 
-  bar.width.margin <- 0.1 / ncol(X)
-  bar.height.margin <- 0.1 / nrow(X)
+  X.normalize <- if (min(X) < 0){
+    X.normalize <- X - min(X)
+    round(X.normalize / max(X.normalize), 2) * 100
+  }
+  else round(X / max(X), 2) * 100
+
+  bar.width.margin <- 0.05
+  bar.height.margin <- 0.05
 
   graphics::plot(X, xlim = c(0.5, ncol(X) + 0.5), ylim = c(nrow(X) + 0.5, 0.5),
                  type = "n", axes = F, ann = F)
