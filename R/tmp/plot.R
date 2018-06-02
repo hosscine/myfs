@@ -61,30 +61,34 @@ image2 <- function(X, trans = F, col.rainbow = T, col.gray0 = F,bar.mar = 2){
 databar <- function(X, grid = T){
   require(plotrix)
 
-  m <- max(X)
-  normX <- round(X / m,2)*100
+  normX <- if (min(X) < 0){
+    normX <- X - min(X)
+    round(normX / max(normX), 2) * 100
+  }
+  else round((X - min(X)) / max(X), 2) * 100
 
   x <- 1:ncol(X)
   xl <- length(x)
   y <- 1:nrow(X)
   yl <- length(y)
-  xmar <- 0.1 / xl
-  ymar <- 0.1 / yl
+  xmar <- 0.05
+  ymar <- 0.05
 
-  plot(X, xlim=c(0.5,x[xl]+0.5), ylim=c(y[yl]+0.5,0.5), type = "n", axes = F, ann = F)
+  plot(X, xlim=c(0.5, x[xl] + 0.5), ylim = c(y[yl] + 0.5, 0.5), type = "n", axes = F, ann = F)
   axis(side = 1, at = x, labels = colnames(X))
   axis(side = 2, at = y, labels = rownames(X), las=T)
   if (grid) {
-    sapply(c(0,x), function(v)abline(v=v+0.5))
-    sapply(c(0,y), function(h)abline(h=h+0.5))
+    sapply(c(0, x), function(v) abline(v = v + 0.5))
+    sapply(c(0, y), function(h) abline(h = h + 0.5))
   }
 
   for (x in 1:xl) {
     for (y in 1:yl) {
-      if (normX[y,x]!=0) gradient.rect(xleft = x-0.5+xmar, ybottom = y-0.5+ymar,
-                                       xright = x-0.5+(1-xmar)*normX[y,x]/100, ytop = y+0.5-ymar,
-                                       col = cm.colors(100)[1:normX[y,x]])
-      text(x,y,labels = round(X[y,x],2))
+      if (normX[y, x] != 0) gradient.rect(xleft = x - 0.5 + xmar, ybottom = y - 0.5 + ymar,
+                                          xright = x - 0.5 + (1 - xmar) * normX[y, x] / 100,
+                                          ytop = y + 0.5 - ymar,
+                                          col = cm.colors(100)[1:normX[y, x]])
+      text(x, y, labels = round(X[y, x], 2))
     }
   }
 }
