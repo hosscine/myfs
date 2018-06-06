@@ -112,16 +112,15 @@ databar <- function(X, grid = T){
 #' @export
 #'
 #' @examples
-#'
 #' x <- seq(0, 2*pi, length.out = 100)
 #' X <- rbind(sin(x), cos(x), sin(x) + cos(x))
 #' rownames(X) <- c("sin(x)", "cos(x)", "sin(x) + cos(x)")
 #'
-#' plot.lines(X, "topright")
+#' plotLines(X, "topright")
 #'
-plot.lines <- function(X, legend.locale="topleft"){
+plotLines <- function(X, legend.locale="topleft"){
   ylim <- range(X)
-  graphics::plot(0, xlim = c(1, ncol(X)), ylim = range(X), type = "n", axes = F)
+  graphics::plot(0, xlim = c(1, ncol(X)), ylim = range(X), type = "n", ann = F)
   for(n in 1:nrow(X)) graphics::lines(X[n,], col = n)
   if(!is.null(rownames(X)))
     graphics::legend(legend.locale, legend = rownames(X), col=1:nrow(X), pch = 3)
