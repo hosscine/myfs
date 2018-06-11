@@ -4,12 +4,14 @@
 \alias{plotLines}
 \title{Plot matlix as a set of lines}
 \usage{
-plotLines(X, legend.locale = "topleft")
+plotLines(X, legend.locale = "topleft", ...)
 }
 \arguments{
 \item{X}{target matrix.}
 
 \item{legend.locale}{location of legend, for example, "topleft" or "bottomright"}
+
+\item{...}{graphics parameters}
 }
 \description{
 Plot matlix as a set of lines

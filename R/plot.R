@@ -108,6 +108,7 @@ databar <- function(X, grid = T){
 #'
 #' @param X target matrix.
 #' @param legend.locale location of legend, for example, "topleft" or "bottomright"
+#' @param ... graphics parameters
 #'
 #' @export
 #'
@@ -118,9 +119,10 @@ databar <- function(X, grid = T){
 #'
 #' plotLines(X, "topright")
 #'
-plotLines <- function(X, legend.locale="topleft"){
-  ylim <- range(X)
-  graphics::plot(0, xlim = c(1, ncol(X)), ylim = range(X), type = "n", ann = F)
+plotLines <- function(X, legend.locale = "topleft", ...){
+  elp <- overwriteEllipsis(..., x = 0, type = "n")
+  elp <- softwriteEllipsis(..., xlim = c(1, ncol(X)), ylim = range(X), ann = F, append = elp)
+  do.call(plot, elp)
   for(n in 1:nrow(X)) graphics::lines(X[n,], col = n)
   if(!is.null(rownames(X)))
     graphics::legend(legend.locale, legend = rownames(X), col=1:nrow(X), pch = 3)
