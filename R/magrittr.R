@@ -11,6 +11,8 @@
 #' @export
 #'
 #' @examples
+#' require(magrittr)
+#'
 #' x <- 1:4
 #' x.sum <- x %>% passign(x.sqrt, function_list = list(sqrt)) %>% sum
 #'
@@ -35,11 +37,39 @@ passign <- function(value, x, function_list = list(), envir = globalenv()){
 #' @export
 #'
 #' @examples
-#' # this is equivalent to `2 %>% {rep(5, .)} %>% sqrt`
+#' require(magrittr)
+#'
+#' #
+#' # this is equivalent to
+#' # `2 %>% {rep(5, .)} %>% sqrt`
+#' #
 #' 2 %.% rep(5, .) %>% sqrt
 #'
 '%.%' <- function(lhs, rhs){
   . <- lhs
   key <- as.list(substitute(list(rhs)))[-1]
   return(eval(parse(text = key)))
+}
+
+#' magrittr tee operator with giving nothing to first argment
+#'
+#' @param lhs a value or the magrittr placeholder.
+#' @param rhs a function call using the magrittr semantics.
+#'
+#' @export
+#'
+#' @examples
+#' require(magrittr)
+#'
+#' #
+#' # this is equivalent to
+#' # 1:2 %T>% {plot(0:3, xlim = .)} %>% sqrt
+#' #
+#' 1:2 %T.% plot(0:3, xlim = .) %>% sqrt
+#'
+'%T.%' <- function(lhs, rhs){
+  . <- lhs
+  key <- as.list(substitute(list(rhs)))[-1]
+  eval(parse(text = key))
+  return(lhs)
 }

@@ -122,7 +122,7 @@ databar <- function(X, grid = T){
 plotLines <- function(X, legend.locale = "topleft", ...){
   elp <- overwriteEllipsis(..., x = 0, type = "n")
   elp <- softwriteEllipsis(..., xlim = c(1, ncol(X)), ylim = range(X), ann = F, append = elp)
-  do.call(plot, elp)
+  do.call(graphics::plot, elp)
   for(n in 1:nrow(X)) graphics::lines(X[n,], col = n)
   if(!is.null(rownames(X)))
     graphics::legend(legend.locale, legend = rownames(X), col=1:nrow(X), pch = 3)

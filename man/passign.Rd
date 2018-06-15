@@ -22,6 +22,8 @@ passign(value, x, function_list = list(), envir = globalenv())
 assign function for pipe stream
 }
 \examples{
+require(magrittr)
+
 x <- 1:4
 x.sum <- x \%>\% passign(x.sqrt, function_list = list(sqrt)) \%>\% sum
 
