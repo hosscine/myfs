@@ -26,3 +26,20 @@ passign <- function(value, x, function_list = list(), envir = globalenv()){
   }
   return(value)
 }
+
+#' magrittr operator with giving nothing to first argment
+#'
+#' @param lhs a value or the magrittr placeholder.
+#' @param rhs a function call using the magrittr semantics.
+#'
+#' @export
+#'
+#' @examples
+#' # this is equivalent to `2 %>% {rep(5, .)} %>% sqrt`
+#' 2 %.% rep(5, .) %>% sqrt
+#'
+'%.%' <- function(lhs, rhs){
+  . <- lhs
+  key <- as.list(substitute(list(rhs)))[-1]
+  return(eval(parse(text = key)))
+}
