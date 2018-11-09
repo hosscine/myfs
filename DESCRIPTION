@@ -19,4 +19,4 @@ Imports:
     colorRamps,
     fields,
     plotrix
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0

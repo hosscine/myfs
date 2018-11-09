@@ -318,3 +318,27 @@ padding.matrix <- function(X, size = 1, replace = NULL){
 
   return(padded)
 }
+
+#' Calculate second highest value in vector.
+#'
+#' @param x target vector.
+#'
+#' @return second highest value.
+#' @export
+#'
+max2nd <- function(x) {
+  n <- length(x)
+  sort(x, partial = n - 1)[n - 1]
+}
+
+#' Calculate second lowest value in vector.
+#'
+#' @param x target vector.
+#'
+#' @return second lowest value.
+#' @export
+#'
+min2nd <- function(x) {
+  n <- length(x)
+  -sort(-x, partial = n - 1)[n - 1]
+}
