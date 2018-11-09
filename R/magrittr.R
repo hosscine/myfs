@@ -19,10 +19,9 @@
 #' print(x.sum)
 #' print(x.sqrt)
 #'
-passign <- function(value, x, function_list = list(), envir = globalenv()){
-  if (length(function_list) == 0)
-    assign(x = as.character(substitute(x)), value = value, envir = envir)
-  else {
+passign <- function(value, x, function_list = list(), envir = globalenv()) {
+  if (length(function_list) == 0) 
+    assign(x = as.character(substitute(x)), value = value, envir = envir) else {
     new.value <- freduce(value, function_list)
     assign(x = as.character(substitute(x)), value = new.value, envir = envir)
   }
@@ -45,7 +44,7 @@ passign <- function(value, x, function_list = list(), envir = globalenv()){
 #' #
 #' 2 %.% rep(5, .) %>% sqrt
 #'
-'%.%' <- function(lhs, rhs){
+"%.%" <- function(lhs, rhs) {
   . <- lhs
   key <- as.list(substitute(list(rhs)))[-1]
   return(eval(parse(text = key)))
@@ -67,7 +66,7 @@ passign <- function(value, x, function_list = list(), envir = globalenv()){
 #' #
 #' 1:2 %T.% plot(0:3, xlim = .) %>% sqrt
 #'
-'%T.%' <- function(lhs, rhs){
+"%T.%" <- function(lhs, rhs) {
   . <- lhs
   key <- as.list(substitute(list(rhs)))[-1]
   eval(parse(text = key))

@@ -1,34 +1,35 @@
-writeEllipsis <- function(..., append = NULL, warn = T, soft = F){
+writeEllipsis <- function(..., append = NULL, warn = T, soft = F) {
   assert_that(is.logical(warn))
-  if(is.logical(append)) stop("argment append requires over/softwrited ellipsis")
-
+  if (is.logical(append)) 
+    stop("argment append requires over/softwrited ellipsis")
+  
   dots <- list(...)
-  if(!is.null(append)) dots <- c(dots, append)
+  if (!is.null(append)) 
+    dots <- c(dots, append)
   dots.names <- names(dots)
   unique.names <- unique(dots.names)
-
+  
   # flags of conflicting with the fixed argments
   conflict.flags <- logical(length(unique.names))
   # index of ellipsis that is used for the returned args
   dots.use.index <- numeric(length(unique.names))
-
+  
   for (i in 1:length(unique.names)) {
-
+    
     hit.index <- which(dots.names == unique.names[i])
-
-    if(length(hit.index) > 1) conflict.flags[i] <- TRUE
-
-    if(soft) dots.use.index[i] <- min(hit.index)
-    else dots.use.index[i] <- max(hit.index)
-
+    
+    if (length(hit.index) > 1) 
+      conflict.flags[i] <- TRUE
+    
+    if (soft) 
+      dots.use.index[i] <- min(hit.index) else dots.use.index[i] <- max(hit.index)
+    
   }
-
-  if(warn && T %in% conflict.flags)
-    if(soft) warning("arguments ", paste(unique.names[conflict.flags],"",collapse = "and "),
-                     "conflicted with recommeded argments")
-    else warning("arguments ", paste(unique.names[conflict.flags],"",collapse = "and "),
-                 "is fixed")
-
+  
+  if (warn && T %in% conflict.flags) 
+    if (soft) 
+      warning("arguments ", paste(unique.names[conflict.flags], "", collapse = "and "), "conflicted with recommeded argments") else warning("arguments ", paste(unique.names[conflict.flags], "", collapse = "and "), "is fixed")
+  
   return(dots[dots.use.index])
 }
 
@@ -49,19 +50,19 @@ writeEllipsis <- function(..., append = NULL, warn = T, soft = F){
 #' @export
 #'
 #' @examples
-#' # plot function with xlim = c(0, 2 * pi) and col = "red"
+#' # plot function with xlim = c(0, 2 * pi) and col = 'red'
 #' plot2pired <- function(x, ...){
-#'   elp <- overwriteEllipsis(..., x = x, xlim = c(0, 2 * pi), col = "red")
+#'   elp <- overwriteEllipsis(..., x = x, xlim = c(0, 2 * pi), col = 'red')
 #'   do.call(plot, elp)
 #' }
 #'
 #' plot2pired(sin)
 #'
 #' # this example is warned due to conflict argments
-#' plot2pired(sin, main = "sin curve", xlim = c(-pi, pi))
+#' plot2pired(sin, main = 'sin curve', xlim = c(-pi, pi))
 #'
-overwriteEllipsis <- function(..., append = NULL, warn = T)
-  writeEllipsis(..., warn = warn, soft = F, append = append)
+overwriteEllipsis <- function(..., append = NULL, warn = T) writeEllipsis(..., warn = warn, soft = F, 
+  append = append)
 
 #' Overwrite some desirable arguments to \code{...} softly.
 #'
@@ -77,18 +78,18 @@ overwriteEllipsis <- function(..., append = NULL, warn = T)
 #' @export
 #'
 #' @examples
-#' # plot function with xlim = c(0, 2 * pi) and col = "red" defaultly
+#' # plot function with xlim = c(0, 2 * pi) and col = 'red' defaultly
 #' plot2pi <- function(x, ...){
 #'   elp <- overwriteEllipsis(..., x = x, xlim = c(0, 2 * pi))
-#'   elp <- softwriteEllipsis(..., append = elp, col = "red")
+#'   elp <- softwriteEllipsis(..., append = elp, col = 'red')
 #'   do.call(plot, elp)
 #' }
 #'
-#' # this example is evaluated as col = "red"
+#' # this example is evaluated as col = 'red'
 #' plot2pi(sin)
 #'
-#' # this example is evaluated as col = "blue"
-#' plot2pi(sin, col = "blue")
+#' # this example is evaluated as col = 'blue'
+#' plot2pi(sin, col = 'blue')
 #'
-softwriteEllipsis <- function(..., append = NULL, warn = F)
-  writeEllipsis(..., warn = warn, soft = T, append = append)
+softwriteEllipsis <- function(..., append = NULL, warn = F) writeEllipsis(..., warn = warn, soft = T, 
+  append = append)

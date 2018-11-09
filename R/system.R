@@ -8,22 +8,24 @@
 #' @export
 #' @examples runif.sum <- evalTimer(sum(runif(5000)))
 #'
-evalTimer <- function(eval,keep=F,return=T){
-  cat("Timer start:",as.character(Sys.time()),"\n")
+evalTimer <- function(eval, keep = F, return = T) {
+  cat("Timer start:", as.character(Sys.time()), "\n")
   t <- proc.time()
   ret <- eval
-  cat("Timer end  :",as.character(Sys.time()),"\n\n")
-  cat("elapsed time is:",(time <- proc.time()-t)[3])
+  cat("Timer end  :", as.character(Sys.time()), "\n\n")
+  cat("elapsed time is:", (time <- proc.time() - t)[3])
   # print(time <- proc.time()-t)
-  if(keep) attr(ret,"time") <- time
-  if(return) return(ret)
+  if (keep) 
+    attr(ret, "time") <- time
+  if (return) 
+    return(ret)
 }
 
 
 #' Waits until enter key is pressd.
 #'
 #' @export
-#' @examplesã€€
+#' @examplesã€\u0080
 #' f <- function(n){
 #'   mat <- matrix(runif(n**2,n,n))
 #'   plot(mat); keywait()
@@ -31,17 +33,17 @@ evalTimer <- function(eval,keep=F,return=T){
 #' }
 #' f(3)
 #'
-keywait <- function() invisible(readline(prompt="Press [enter] to continue"))
+keywait <- function() invisible(readline(prompt = "Press [enter] to continue"))
 
 
 #' Save global environment.
 #'
-#' Save global environment as non named file ".RData" without closing RStudio.
+#' Save global environment as non named file '.RData' without closing RStudio.
 #' Directory to save is set project directory.
 #'
 #' @export
 #'
-saveEnvironment <- function(){
+saveEnvironment <- function() {
   setwdProject()
   . <- save.image(".RData")
 }
@@ -61,17 +63,20 @@ setwdProject <- function() setwd(rstudioapi::getActiveProject())
 #'
 #' @export
 #'
-dir.create.deep <- function(pass){
-  sppass <- strsplit(pass,split = "/")
+dir.create.deep <- function(pass) {
+  sppass <- strsplit(pass, split = "/")
   sppass <- as.list(sppass[[1]])
   for (i in 1:length(sppass)) {
     sppass.tmp <- sppass[1:i]
     sppass.tmp$sep <- "/"
-    pass.tmp <- do.call(paste,sppass.tmp)
-    if(pass.tmp == "" || nchar(pass.tmp) == 2) next
-
+    pass.tmp <- do.call(paste, sppass.tmp)
+    if (pass.tmp == "" || nchar(pass.tmp) == 2) 
+      next
+    
     dirok <- try(is.dir(pass.tmp), silent = T)
-    if(dirok != T) dir.create(pass.tmp)
+    if (dirok != T) 
+      dir.create(pass.tmp)
   }
-  if(!is.dir(pass)) stop(paste("creation of directory",pass,"is failed."))
+  if (!is.dir(pass)) 
+    stop(paste("creation of directory", pass, "is failed."))
 }

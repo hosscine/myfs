@@ -9,10 +9,12 @@
 #' @return random natural numbers.
 #' @export
 #'
-runifN <- function(n,min=1,max=10){
-  if(min > max) stop("argment max is not larger than min.")
-  if(!min-round(min)==0 || !max-round(max)==0) stop("argment max and min must be integer.")
-  return(ceiling(runif(n,min=min-1,max = max)))
+runifN <- function(n, min = 1, max = 10) {
+  if (min > max) 
+    stop("argment max is not larger than min.")
+  if (!min - round(min) == 0 || !max - round(max) == 0) 
+    stop("argment max and min must be integer.")
+  return(ceiling(runif(n, min = min - 1, max = max)))
 }
 
 #' Calculates norm of \code{x}.
@@ -45,7 +47,7 @@ rowNorm <- function(X) sqrt(rowSums(X^2))
 #' @return \code{X - a} in row first.
 #' @export
 #'
-rowMinus <- function(X,a) t(t(X)-a)
+rowMinus <- function(X, a) t(t(X) - a)
 
 #' Calculates \code{X \* a} with row first.
 #'
@@ -57,7 +59,7 @@ rowMinus <- function(X,a) t(t(X)-a)
 #'
 #' @return \code{X \* a} with row first.
 #'
-rowTimes <- function(X,a) t(t(X)*a)
+rowTimes <- function(X, a) t(t(X) * a)
 
 #' Replaces NA from matrix with maintaining the dimension.
 #'
@@ -67,7 +69,7 @@ rowTimes <- function(X,a) t(t(X)*a)
 #' @return NA removed matrix.
 #' @export
 #'
-replaceNA <- function(X, replace = 0) return(ifelse(is.na(X),replace,X))
+replaceNA <- function(X, replace = 0) return(ifelse(is.na(X), replace, X))
 
 #' \code{order} function regards a duplication value as the same ranking.
 #'
@@ -77,12 +79,13 @@ replaceNA <- function(X, replace = 0) return(ifelse(is.na(X),replace,X))
 #' @return order of \code{x}.
 #' @export
 #'
-order2 <- function(x, decreasing = F){
+order2 <- function(x, decreasing = F) {
   v <- sort(unique(x))
-  if(decreasing) v <- rev(v)
+  if (decreasing) 
+    v <- rev(v)
   o <- numeric(length(x))
   for (val in 1:length(v)) {
-    o[which(x==v[val])] <- val
+    o[which(x == v[val])] <- val
   }
   return(o)
 }
@@ -94,8 +97,8 @@ order2 <- function(x, decreasing = F){
 #' @return matrix presents rank.
 #' @export
 #'
-rank.matrix <- function(X){
-  ranks <- (floor(rank(X))+1)/2
+rank.matrix <- function(X) {
+  ranks <- (floor(rank(X)) + 1)/2
   return(matrix(ranks, nrow(X), ncol(X), byrow = T))
 }
 
@@ -106,11 +109,11 @@ rank.matrix <- function(X){
 #' @return index of minimum element.
 #' @export
 #'
-which.min.ind <- function(X){
+which.min.ind <- function(X) {
   r <- myfs::rank.matrix(X)
   s <- unique(sort(r))
-  olst <- lapply(s, function(s,r) which(r==s,arr.ind = T), r)
-  return(myfs::matlist(olst)[,2:1])
+  olst <- lapply(s, function(s, r) which(r == s, arr.ind = T), r)
+  return(myfs::matlist(olst)[, 2:1])
 }
 
 #' Searches index of maximum element from matrix.
@@ -120,11 +123,11 @@ which.min.ind <- function(X){
 #' @return index of maximum element.
 #' @export
 #'
-which.max.ind <- function(X){
+which.max.ind <- function(X) {
   r <- myfs::rank.matrix(X)
-  s <- unique(sort(r,decreasing = T))
-  olst <- lapply(s, function(s,r) which(r==s,arr.ind = T), r)
-  return(myfs::matlist(olst)[,2:1])
+  s <- unique(sort(r, decreasing = T))
+  olst <- lapply(s, function(s, r) which(r == s, arr.ind = T), r)
+  return(myfs::matlist(olst)[, 2:1])
 }
 
 #' Orders matrix in each rows.
@@ -136,19 +139,20 @@ which.max.ind <- function(X){
 #' @return matrix with orderd each rows.
 #' @export
 #'
-order.col <- function(X, decreasing = F, ignore0 = F){
-  if(nrow(X)<=ncol(X)) warning("when nrow <= ncol, using t(apply(X,1,order)) is faster")
+order.col <- function(X, decreasing = F, ignore0 = F) {
+  if (nrow(X) <= ncol(X)) 
+    warning("when nrow <= ncol, using t(apply(X,1,order)) is faster")
   odr <- X
-  if(decreasing) work.X <- -X
-  else work.X <- X
-  acs <- cbind(1:nrow(X),0)
-  if(ignore0){
-    if(max(abs(X))==Inf) stop("ignore0 is invalid when X include Inf")
-    else work.X[which(X==0)] <- max(X)+1
+  if (decreasing) 
+    work.X <- -X else work.X <- X
+  acs <- cbind(1:nrow(X), 0)
+  if (ignore0) {
+    if (max(abs(X)) == Inf) 
+      stop("ignore0 is invalid when X include Inf") else work.X[which(X == 0)] <- max(X) + 1
   }
-  for(i in 1:ncol(X)){
-    acs[,2] <- max.col(-work.X)
-    odr[,i] <- acs[,2]
+  for (i in 1:ncol(X)) {
+    acs[, 2] <- max.col(-work.X)
+    odr[, i] <- acs[, 2]
     work.X[acs] <- Inf
   }
   return(odr)
@@ -163,19 +167,20 @@ order.col <- function(X, decreasing = F, ignore0 = F){
 #' @return matrix with sorted each rows.
 #' @export
 #'
-sort_col <- function(X, decreasing = F, ignore0 = F){
-  if(nrow(X)<=ncol(X)) warning("when nrow <= ncol, using t(apply(X,1,sort)) is faster")
+sort_col <- function(X, decreasing = F, ignore0 = F) {
+  if (nrow(X) <= ncol(X)) 
+    warning("when nrow <= ncol, using t(apply(X,1,sort)) is faster")
   srt <- X
-  if(decreasing) work.X <- -X
-  else work.X <- X
-  acs <- cbind(1:nrow(X),0)
-  if(ignore0){
-    if(max(abs(X))==Inf) stop("ignore0 is invalid when X include Inf")
-    else work.X[which(X==0)] <- max(X)+1
+  if (decreasing) 
+    work.X <- -X else work.X <- X
+  acs <- cbind(1:nrow(X), 0)
+  if (ignore0) {
+    if (max(abs(X)) == Inf) 
+      stop("ignore0 is invalid when X include Inf") else work.X[which(X == 0)] <- max(X) + 1
   }
-  for(i in 1:ncol(X)){
-    acs[,2] <- max.col(-work.X)
-    srt[,i] <- X[acs]
+  for (i in 1:ncol(X)) {
+    acs[, 2] <- max.col(-work.X)
+    srt[, i] <- X[acs]
     work.X[acs] <- Inf
   }
   return(srt)
@@ -196,10 +201,14 @@ sort_col <- function(X, decreasing = F, ignore0 = F){
 #' lst <- lapply(1:5,rep,3)
 #' matlist(lst)
 #'
-matlist <- function(lst, nrow=length(lst), ncol=length(lst[[nrow]]), rname=names(lst), cname=names(lst[[nrow]])){
-  if (length(lst)==0) stop("input list is empty")
-  lst <- lapply(lst,function(l){length(l)<-ncol;l})
-  mat <- matrix(unlist(lst), nrow, ncol,byrow = T)
+matlist <- function(lst, nrow = length(lst), ncol = length(lst[[nrow]]), rname = names(lst), cname = names(lst[[nrow]])) {
+  if (length(lst) == 0) 
+    stop("input list is empty")
+  lst <- lapply(lst, function(l) {
+    length(l) <- ncol
+    l
+  })
+  mat <- matrix(unlist(lst), nrow, ncol, byrow = T)
   rownames(mat) <- rname
   colnames(mat) <- cname
   return(mat)
@@ -213,7 +222,7 @@ matlist <- function(lst, nrow=length(lst), ncol=length(lst[[nrow]]), rname=names
 #' @return euclidean distance between \code{x} and \code{y}.
 #' @export
 #'
-euclidean <- function(x,y) sqrt(sum((x-y)^2))
+euclidean <- function(x, y) sqrt(sum((x - y)^2))
 
 #' Integrates discrete vector by quadrature.
 #'
@@ -227,11 +236,11 @@ euclidean <- function(x,y) sqrt(sum((x-y)^2))
 #' dens <- density(n)
 #' quadrature(dens)
 #'
-quadrature <- function(x){
+quadrature <- function(x) {
   assert_that(class(x) == "density")
   y <- x$y
   x <- x$x
-  sum(diff(x)*y[2:length(y)])
+  sum(diff(x) * y[2:length(y)])
 }
 
 #' Calculates angle of 2-dimensional vectors.
@@ -253,18 +262,20 @@ quadrature <- function(x){
 #' angle(c(0, 1), c(1, 0))
 #' # = 3 / 2 * pi
 #'
-angle <- function(x, y){
+angle <- function(x, y) {
   assert_that(length(x) == 2)
   assert_that(length(y) == 2)
-
+  
   xrad <- atan2(x[2], x[1])
-  if(xrad < 0) xrad <- xrad + 2*pi
+  if (xrad < 0) 
+    xrad <- xrad + 2 * pi
   yrad <- atan2(y[2], y[1])
-  if(yrad < 0) yrad <- yrad + 2*pi
-
+  if (yrad < 0) 
+    yrad <- yrad + 2 * pi
+  
   angle <- yrad - xrad
-  if(angle < 0) return(angle + 2*pi)
-  else return(angle)
+  if (angle < 0) 
+    return(angle + 2 * pi) else return(angle)
 }
 
 #' Padding (expanding rows and cols) for \code{matrix}.
@@ -279,43 +290,44 @@ angle <- function(x, y){
 #' @return padding matrix.
 #' @export
 #'
-padding.matrix <- function(X, size = 1, replace = NULL){
+padding.matrix <- function(X, size = 1, replace = NULL) {
   # check args
   assert_that(nrow(X) >= 2 && ncol(X) >= 2)
-  if(is.number(replace)) data <- replace
-  else data <- 0
-
+  if (is.number(replace)) 
+    data <- replace else data <- 0
+  
   # simple padding
   padded <- matrix(data, nrow(X) + size * 2, ncol(X) + size * 2)
   padded[(1 + size):(nrow(padded) - size), (1 + size):(ncol(padded) - size)] <- X
-
+  
   # padding with border values of matrix.
-  if(is.null(replace)){
-    padded[expand.grid(1:(1 + size), 1:(1 + size)) %>% as.matrix] <-
-      X[1, 1] # top left
-    padded[expand.grid((2 + size):(size + nrow(X) - 1), 1:(1 + size)) %>% as.matrix] <-
-      X[2:(nrow(X) - 1), 1] # middle left
-    padded[expand.grid((size + nrow(X)):nrow(padded), 1:(1 + size)) %>% as.matrix] <-
-      X[nrow(X), 1] # bottom left
-
-    if(ncol(X) > 2){
+  if (is.null(replace)) {
+    padded[expand.grid(1:(1 + size), 1:(1 + size)) %>% as.matrix] <- X[1, 1]  # top left
+    padded[expand.grid((2 + size):(size + nrow(X) - 1), 1:(1 + size)) %>% as.matrix] <- X[2:(nrow(X) - 
+      1), 1]  # middle left
+    padded[expand.grid((size + nrow(X)):nrow(padded), 1:(1 + size)) %>% as.matrix] <- X[nrow(X), 
+      1]  # bottom left
+    
+    if (ncol(X) > 2) {
       ind.top.center <- expand.grid(1:(1 + size), (2 + size):(size + ncol(X) - 1)) %>% as.matrix
-      ind.top.center <- ind.top.center[sapply(1:(size + 1), seq, to = nrow(ind.top.center), by = size + 1) %>% as.numeric,]
-      padded[ind.top.center] <- X[1, 2:(ncol(X) - 1)] # top center
-
-      ind.bottom.center <- expand.grid((size + nrow(X)):nrow(padded), (2 + size):(size + ncol(X) - 1)) %>% as.matrix
-      ind.bottom.center <- ind.bottom.center[sapply(1:(size + 1), seq, to = nrow(ind.bottom.center), by = size + 1) %>% as.numeric,]
-      padded[ind.bottom.center] <- X[nrow(X), 2:(ncol(X) - 1)] # bottom center
+      ind.top.center <- ind.top.center[sapply(1:(size + 1), seq, to = nrow(ind.top.center), 
+        by = size + 1) %>% as.numeric, ]
+      padded[ind.top.center] <- X[1, 2:(ncol(X) - 1)]  # top center
+      
+      ind.bottom.center <- expand.grid((size + nrow(X)):nrow(padded), (2 + size):(size + ncol(X) - 
+        1)) %>% as.matrix
+      ind.bottom.center <- ind.bottom.center[sapply(1:(size + 1), seq, to = nrow(ind.bottom.center), 
+        by = size + 1) %>% as.numeric, ]
+      padded[ind.bottom.center] <- X[nrow(X), 2:(ncol(X) - 1)]  # bottom center
     }
-
-    padded[expand.grid(1:(1 + size), (size + ncol(X)):ncol(padded)) %>% as.matrix] <-
-      X[1, ncol(X)] # top right
-    padded[expand.grid((2 + size):(size + nrow(X) - 1), (size + ncol(X)):ncol(padded)) %>% as.matrix] <-
-      X[2:(nrow(X) - 1), ncol(X)] # middle right
-    padded[expand.grid((size + nrow(X)):nrow(padded), (size + ncol(X)):ncol(padded)) %>% as.matrix] <-
-      X[nrow(X), ncol(X)] # bottom right
+    
+    padded[expand.grid(1:(1 + size), (size + ncol(X)):ncol(padded)) %>% as.matrix] <- X[1, ncol(X)]  # top right
+    padded[expand.grid((2 + size):(size + nrow(X) - 1), (size + ncol(X)):ncol(padded)) %>% as.matrix] <- X[2:(nrow(X) - 
+      1), ncol(X)]  # middle right
+    padded[expand.grid((size + nrow(X)):nrow(padded), (size + ncol(X)):ncol(padded)) %>% as.matrix] <- X[nrow(X), 
+      ncol(X)]  # bottom right
   }
-
+  
   return(padded)
 }
 
