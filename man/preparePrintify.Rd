@@ -7,5 +7,5 @@
 preparePrintify()
 }
 \description{
-enable to background color of code chunks and remove "hide" button.
+enable to background color of code chunks and remove 'hide' button.
 }

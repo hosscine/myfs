@@ -15,9 +15,9 @@ evalTimer <- function(eval, keep = F, return = T) {
   cat("Timer end  :", as.character(Sys.time()), "\n\n")
   cat("elapsed time is:", (time <- proc.time() - t)[3])
   # print(time <- proc.time()-t)
-  if (keep) 
+  if (keep)
     attr(ret, "time") <- time
-  if (return) 
+  if (return)
     return(ret)
 }
 
@@ -25,7 +25,7 @@ evalTimer <- function(eval, keep = F, return = T) {
 #' Waits until enter key is pressd.
 #'
 #' @export
-#' @examplesã€\u0080
+#' @examples
 #' f <- function(n){
 #'   mat <- matrix(runif(n**2,n,n))
 #'   plot(mat); keywait()
@@ -70,13 +70,13 @@ dir.create.deep <- function(pass) {
     sppass.tmp <- sppass[1:i]
     sppass.tmp$sep <- "/"
     pass.tmp <- do.call(paste, sppass.tmp)
-    if (pass.tmp == "" || nchar(pass.tmp) == 2) 
+    if (pass.tmp == "" || nchar(pass.tmp) == 2)
       next
-    
+
     dirok <- try(is.dir(pass.tmp), silent = T)
-    if (dirok != T) 
+    if (dirok != T)
       dir.create(pass.tmp)
   }
-  if (!is.dir(pass)) 
+  if (!is.dir(pass))
     stop(paste("creation of directory", pass, "is failed."))
 }

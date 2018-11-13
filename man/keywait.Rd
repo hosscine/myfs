@@ -10,7 +10,6 @@ keywait()
 Waits until enter key is pressd.
 }
 \examples{
-　
 f <- function(n){
   mat <- matrix(runif(n**2,n,n))
   plot(mat); keywait()

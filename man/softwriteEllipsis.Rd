@@ -21,18 +21,18 @@ This function is minor modificated version of \code{\link{overwriteEllipsis}}.
 The only difference is that don't overwrite conflict argments.
 }
 \examples{
-# plot function with xlim = c(0, 2 * pi) and col = "red" defaultly
+# plot function with xlim = c(0, 2 * pi) and col = 'red' defaultly
 plot2pi <- function(x, ...){
   elp <- overwriteEllipsis(..., x = x, xlim = c(0, 2 * pi))
-  elp <- softwriteEllipsis(..., append = elp, col = "red")
+  elp <- softwriteEllipsis(..., append = elp, col = 'red')
   do.call(plot, elp)
 }
 
-# this example is evaluated as col = "red"
+# this example is evaluated as col = 'red'
 plot2pi(sin)
 
-# this example is evaluated as col = "blue"
-plot2pi(sin, col = "blue")
+# this example is evaluated as col = 'blue'
+plot2pi(sin, col = 'blue')
 
 }
 \seealso{

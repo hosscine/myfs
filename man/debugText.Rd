@@ -13,7 +13,6 @@ debugText(...)
 Prints variables or expressions  for debug.
 }
 \examples{
-　
 f <- function(x,y){
   debugText(x^y,y)
   return(x^y+y)

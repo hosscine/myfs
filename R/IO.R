@@ -16,7 +16,7 @@ print.noattr <- function(x, keeps = c("names", "row.names", "class", "dim", "dim
 #' @param ... printed objects.
 #'
 #' @export
-#' @examplesã€\u0080
+#' @examples
 #' f <- function(x,y){
 #'   debugText(x^y,y)
 #'   return(x^y+y)
@@ -30,8 +30,8 @@ debugText <- function(...) {
     if (typeof(k) == "language") {
       cat(as.character(k), "(", class(k)[1], ") = ", sep = "")
     } else cat(k, "(", class(k)[1], ") = ", sep = "")
-    
-    if (!is.matrix(v) && (is.logical(v) || is.numeric(v) || is.complex(v) || is.character(v))) 
+
+    if (!is.matrix(v) && (is.logical(v) || is.numeric(v) || is.complex(v) || is.character(v)))
       cat(v, "\n") else {
       cat("\n")
       print(v)

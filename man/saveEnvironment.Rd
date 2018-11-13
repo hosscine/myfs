@@ -7,6 +7,6 @@
 saveEnvironment()
 }
 \description{
-Save global environment as non named file ".RData" without closing RStudio.
+Save global environment as non named file '.RData' without closing RStudio.
 Directory to save is set project directory.
 }

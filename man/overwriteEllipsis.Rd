@@ -22,16 +22,16 @@ frequently we want to overwrite some arguments as fixed desirable arguments.
 This function helps to settles the situation simply.
 }
 \examples{
-# plot function with xlim = c(0, 2 * pi) and col = "red"
+# plot function with xlim = c(0, 2 * pi) and col = 'red'
 plot2pired <- function(x, ...){
-  elp <- overwriteEllipsis(..., x = x, xlim = c(0, 2 * pi), col = "red")
+  elp <- overwriteEllipsis(..., x = x, xlim = c(0, 2 * pi), col = 'red')
   do.call(plot, elp)
 }
 
 plot2pired(sin)
 
 # this example is warned due to conflict argments
-plot2pired(sin, main = "sin curve", xlim = c(-pi, pi))
+plot2pired(sin, main = 'sin curve', xlim = c(-pi, pi))
 
 }
 \seealso{

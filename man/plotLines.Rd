@@ -9,7 +9,7 @@ plotLines(X, legend.locale = "topleft", ...)
 \arguments{
 \item{X}{target matrix.}
 
-\item{legend.locale}{location of legend, for example, "topleft" or "bottomright"}
+\item{legend.locale}{location of legend, for example, 'topleft' or 'bottomright'}
 
 \item{...}{graphics parameters}
 }
@@ -19,8 +19,8 @@ Plot matlix as a set of lines
 \examples{
 x <- seq(0, 2*pi, length.out = 100)
 X <- rbind(sin(x), cos(x), sin(x) + cos(x))
-rownames(X) <- c("sin(x)", "cos(x)", "sin(x) + cos(x)")
+rownames(X) <- c('sin(x)', 'cos(x)', 'sin(x) + cos(x)')
 
-plotLines(X, "topright")
+plotLines(X, 'topright')
 
 }

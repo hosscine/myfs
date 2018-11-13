@@ -1,7 +1,7 @@
 Package: myfs
 Type: Package
 Title: Useful Functions Created by Myself
-Version: 0.5.2.9000
+Version: 0.5.3.9000
 Authors@R: person("Rentaro", "Futagami", ,"futagamirentaro@gmail.com",c("aut","cre"))
 Description: Including various functions, for example, saves plot immediately, 
     plots beautifully and well summarized, makes easy to treat matrix and list.
@@ -18,5 +18,7 @@ Imports:
     graphics,
     colorRamps,
     fields,
-    plotrix
-RoxygenNote: 6.1.0
+    plotrix,
+    ggplot2
+RoxygenNote: 6.1.1
+Roxygen: list(markdown = TRUE)
