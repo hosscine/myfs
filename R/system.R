@@ -7,8 +7,13 @@
 #'
 #' @return evalated object.
 #' @export
-#' @examples runif.sum <- evalTimer(sum(runif(5000)))
+#' @examples
+#' ex1 <- eval_timer(runif(50000))
 #'
+#' ex2 <- eval_timer(sum(1:5000), index.msg = "large sum", keep = T)
+#' print(attr(ex2, "elapsed))
+#'
+#' ex3 <- lapply(1:3, function(n) eval_timer(runifN(n * 50000), index.msg = n))
 eval_timer <- function(eval, index.msg = NULL, keep = F, return = T) {
   if (!is.null(index.msg)) assert_that(length(index.msg) == 1)
 

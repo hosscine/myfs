@@ -96,6 +96,8 @@ devtools::install_github("hosscine/myfs")
   - save global environment as anonymas file ".Rdata".
 - **`setwdProject()`**
   - set working directory to project directory
+- `dir.create.deep()`
+  - create directory for nested path.
   
 ### Rnotebook support
 - `preparePrintify()`
@@ -106,6 +108,14 @@ devtools::install_github("hosscine/myfs")
   - pipe without passing pipe before result to pipe after first argument.
 - **`%.T%`**
   - pipe by `%.%` with tee.
+  
+### other utilities
+- `saveEnvironment()`
+  - save .globalEnv without quitting R session.
+- `setwdProject()`
+  - set working directory to default of Rstudio project.
+- `eval_timer()`
+  - measure the elapsed time of evaluation and return the result.
 
 ## Licence
 

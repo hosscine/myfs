@@ -21,7 +21,3 @@ evalated object.
 \description{
 Measure the elapsed time of \code{eval} and returns the result.
 }
-\examples{
-runif.sum <- evalTimer(sum(runif(5000)))
-
-}
