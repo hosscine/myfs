@@ -3,15 +3,16 @@ Type: Package
 Title: Useful Functions Created by Myself
 Version: 0.5.4.9000
 Authors@R: person("Rentaro", "Futagami", ,"futagamirentaro@gmail.com",c("aut","cre"))
-Description: Including various functions, for example, saves plot immediately, 
-    plots beautifully and well summarized, makes easy to treat matrix and list.
-License: GPL (>=3)
+Description: Including various functions.
+    Visit my github repository https://github.com/hosscine/myfs
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 BugReports: https://github.com/hosscine/myfs/issues
 Imports:
     grDevices,
     stats,
+    utils,
     assertthat,
     rstudioapi,
     magrittr,
@@ -20,6 +21,9 @@ Imports:
     fields,
     plotrix,
     ggplot2,
-    crayon
+    crayon,
+    purrr,
+    tibble,
+    dplyr
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)

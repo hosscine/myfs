@@ -97,3 +97,21 @@ dir.create.deep <- function(pass) {
   if (!is.dir(pass))
     stop(paste("creation of directory", pass, "is failed."))
 }
+
+#' Summarize object size in global environment.
+#'
+#' @return a tibble that contains summarizing result.
+#' @export
+#' @references this function was impressed by `pryr:::print.bytes()`
+#' authored by Hadly Wickman.
+memory_summary <- function() {
+  size <- purrr::map_dbl(.GlobalEnv %>% as.list, utils::object.size)
+  power <- purrr::map_dbl(size, ~ min(floor(log(abs(.), 1000)), 4))
+  logged <- (size / (1000^power)) %>% round
+  name <- names(size)
+  unit <- c("B", "KB", "MB", "GB", "TB")
+
+  tibble::tibble(name = name, logged = logged, unit = unit[power + 1],
+                 size = as.numeric(size)) %>%
+    dplyr::arrange(size %>% dplyr::desc())
+}
