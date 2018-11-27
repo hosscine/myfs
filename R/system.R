@@ -1,6 +1,7 @@
 #' Measure the elapsed time of \code{eval} and returns the result.
 #'
 #' @param eval evalated code.
+#' @param index.msg integer or character to be used as message.
 #' @param keep if \code{T}, returns evalated object with elapsed time.
 #' @param return if \code{T}, returns evalated object.
 #'
@@ -8,15 +9,26 @@
 #' @export
 #' @examples runif.sum <- evalTimer(sum(runif(5000)))
 #'
-evalTimer <- function(eval, keep = F, return = T) {
-  cat("Timer start:", as.character(Sys.time()), "\n")
-  t <- proc.time()
+eval_timer <- function(eval, index.msg = NULL, keep = F, return = T) {
+  if (!is.null(index.msg)) assert_that(length(index.msg) == 1)
+
+  if (is.null(index.msg))
+    msg <- crayon::white("timer")
+  else if (assertthat::is.number(index.msg))
+    msg <- crayon::bold(paste0("step", index.msg, ":"))
+  else if (is.character(index.msg))
+    msg <- crayon::bold(paste0(index.msg, ":"))
+  else stop("index.msg must be a integer or a character")
+
+  cat(msg, crayon::white("start", as.character(Sys.time()), "\n"))
+  t <- proc.time()["elapsed"]
   ret <- eval
-  cat("Timer end  :", as.character(Sys.time()), "\n\n")
-  cat("elapsed time is:", (time <- proc.time() - t)[3])
+  cat(msg, crayon::white("end  ", as.character(Sys.time()), "\n"))
+  time <- round(proc.time()["elapsed"] - t, 2)
+  cat(crayon::cyan("elapsed time:", time, "\n"))
   # print(time <- proc.time()-t)
   if (keep)
-    attr(ret, "time") <- time
+    attr(ret, "elapsed") <- time
   if (return)
     return(ret)
 }

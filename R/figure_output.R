@@ -138,6 +138,7 @@ savepngTitle <- function(name, current = F, scale=c(450, 500)){
 #'
 saveggpng <- function(name, current = F, scale = c(450, 500), size = 20) {
   g <- ggplot2::last_plot()
+  if (is.null(g)) stop("last_plot is not exist")
   g$theme$text$size <- 20
   print(g)
   savepng(name = name, current = current, scale = scale)
