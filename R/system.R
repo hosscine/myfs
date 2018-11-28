@@ -98,20 +98,49 @@ dir.create.deep <- function(pass) {
     stop(paste("creation of directory", pass, "is failed."))
 }
 
-#' Summarize object size in global environment.
+#' Summarize object size in environment.
 #'
+#' @param accurate if `TRUE`, summarize with using [pryr::object_size()]
+#' to summarize `environment` or `function` object more accuratery.
+#' @param env target environment.
+#' However, that is very slower when `env` contains large objects.
 #' @return a tibble that contains summarizing result.
 #' @export
-#' @references this function was impressed by `pryr:::print.bytes()`
+#' @seealso [pryr::object_size()]
+#' @references this function was supported by `pryr` package
 #' authored by Hadly Wickman.
-memory_summary <- function() {
-  size <- purrr::map_dbl(.GlobalEnv %>% as.list, utils::object.size)
+memory_summary <- function(accurate = F, env = .GlobalEnv) {
+  env <- env %>% as.list
+  if (accurate)
+    size <- purrr::map_dbl(env, pryr::object_size)
+  else
+    size <- purrr::map_dbl(env, utils::object.size)
   power <- purrr::map_dbl(size, ~ min(floor(log(abs(.), 1000)), 4))
   logged <- (size / (1000^power)) %>% round
   name <- names(size)
+  cls <- purrr::map_chr(env, ~ class(.)[1])
+  len <- purrr::map_int(env, length)
   unit <- c("B", "KB", "MB", "GB", "TB")
 
+  cat("total memory used: ")
+  size %>% sum %>% print.bytes()
+
   tibble::tibble(name = name, logged = logged, unit = unit[power + 1],
-                 size = as.numeric(size)) %>%
+                 class = cls, length = len, size = as.numeric(size)) %>%
     dplyr::arrange(size %>% dplyr::desc())
+}
+
+print.bytes <- function (x, digits = 3, ...) {
+  # pryr:::print.bytes()
+  power <- min(floor(log(abs(x), 1000)), 4)
+  if (power < 1) {
+    unit <- "B"
+  }
+  else {
+    unit <- c("kB", "MB", "GB", "TB")[[power]]
+    x <- x/(1000^power)
+  }
+  formatted <- format(signif(x, digits = digits), big.mark = ",",
+                      scientific = FALSE)
+  cat(formatted, " ", unit, "\n", sep = "")
 }

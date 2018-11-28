@@ -2,17 +2,27 @@
 % Please edit documentation in R/system.R
 \name{memory_summary}
 \alias{memory_summary}
-\title{Summarize object size in global environment.}
+\title{Summarize object size in environment.}
 \usage{
-memory_summary()
+memory_summary(accurate = F, env = .GlobalEnv)
+}
+\arguments{
+\item{accurate}{if \code{TRUE}, summarize with using \code{\link[pryr:object_size]{pryr::object_size()}}
+to summarize \code{environment} or \code{function} object more accuratery.}
+
+\item{env}{target environment.
+However, that is very slower when \code{env} contains large objects.}
 }
 \value{
 a tibble that contains summarizing result.
 }
 \description{
-Summarize object size in global environment.
+Summarize object size in environment.
 }
 \references{
-this function was impressed by \code{pryr:::print.bytes()}
+this function was supported by \code{pryr} package
 authored by Hadly Wickman.
+}
+\seealso{
+\code{\link[pryr:object_size]{pryr::object_size()}}
 }

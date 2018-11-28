@@ -4,7 +4,7 @@ Title: Useful Functions Created by Myself
 Version: 0.5.4.9000
 Authors@R: person("Rentaro", "Futagami", ,"futagamirentaro@gmail.com",c("aut","cre"))
 Description: Including various functions.
-    Visit my github repository https://github.com/hosscine/myfs
+    Visit my github repository https://github.com/hosscine/myfs.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -24,6 +24,7 @@ Imports:
     crayon,
     purrr,
     tibble,
-    dplyr
+    dplyr,
+    pryr
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
